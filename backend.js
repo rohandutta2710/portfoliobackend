@@ -44,12 +44,13 @@ app.get("/:api", (req, res) => {
 let date = new Date();
 app.post("/contact", (req, res) => {
     let data = { ...req.body, date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`, time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}` };
+    let guid = uuid.v4();
     var mailOptions = {
         from: process.env.Email_ID,
         to: data.email + ",rohandutta27102000@gmail.com",
-        subject: 'Get in Touch with Rohan!',
+        subject: 'Get in Touch with Rohan! RequestID= ' + guid,
         html: "<p>Hi " + data.name + ", <br/><br/>Our support team will connect you soon. Request you to check your mailbox regularly for further updates." +
-            "<br/><br/><b>Request ID:-</b>" + uuid.v4() + "<br/><b>Your message:-<br/></b> " + data.message + "<br/><br/>Thanks,<br/>RDX Team</p>"
+            "<br/><br/><b>Request ID:- </b>" + guid + "<br/><b>Your message:-<br/></b> " + data.message + "<br/><br/>Thanks,<br/>RDX Team</p>"
     };
     // console.log(data);
     transporter.sendMail(mailOptions, function (error, info) {
