@@ -43,7 +43,7 @@ app.get("/:api", (req, res) => {
 
 let date = new Date();
 app.post("/contact", (req, res) => {
-    let data = { ...req.query, date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`, time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}` };
+    let data = { ...req.body, date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`, time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}` };
     var mailOptions = {
         from: process.env.Email_ID,
         to: data.email + ",rohandutta27102000@gmail.com",
